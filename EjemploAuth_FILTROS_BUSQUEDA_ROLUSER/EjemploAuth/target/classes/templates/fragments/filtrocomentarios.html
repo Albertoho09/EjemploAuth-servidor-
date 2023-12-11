@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Fragmento de Comentario</title>
+</head>
+
+<body>
+	<!---
+	comentarioFragment
+	-->
+	<div th:fragment="filtrousuario">
+		<form th:action="${requestURI}" method="get">
+			<label for="opcion">Selecciona un Usuario:</label>
+			<select id="opcion" name="opcion">
+				<option th:value="TODOS" th:text="TODOS"></option>
+				<option th:each="nombre : ${nombreselector}" th:value="${nombre}" th:text="${nombre}"
+					th:selected="${nombre == opcionPorDefecto}"></option>
+			</select>
+			<button type="submit">Filtrar</button>
+		</form>
+
+	</div>
+	<div th:fragment="filtrocontenido">
+		<form action="${requestURI}" method="get">
+			<h2>Buscar por palabras</h2>
+			<input id="contenido" name="contenido" th:value="${contenido}"></input>
+			<button type="submit">Buscar</button>
+		</form>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Comentario</title>
+    <!-- Incluir Bootstrap CSS desde CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Añadir Comentario</h2>
+        <form th:action="@{/user/agregarComentario}" th:object="${comentario}" method="post">
+            <div class="form-group">
+                <!-- Campo oculto para el ID del comentario (si es necesario) -->
+                <input type="hidden" name="usuarioId"  th:value="${usuarioDTO.id}" readonly>
+
+                <!-- Mostrar el nombre de usuario (solo lectura) -->
+                <div class="form-group">
+                    <label for="nombreUsuario">Usuario:</label>
+                    <input type="text" id="nombreUsuario" th:value="${usuarioDTO.username}" class="form-control" readonly>
+                </div>
+
+                <!-- Fecha y hora de creación (solo lectura) -->
+                <div class="form-group">
+                    <label for="fechaCreacion">Fecha y Hora:</label>
+                    <input type="datetime-local" id="fechaCreacion" th:field="*{fechaCreacion}" class="form-control" readonly>
+                </div>
+
+                <!-- Campo para contenido del comentario -->
+                <div class="form-group">
+                    <label for="contenidoComentario">Contenido del Comentario:</label>
+                    <span th:if="${#fields.hasErrors('contenido')}" class="error" th:errors="*{contenido}"></span>
+                    <input type="text" id="contenidoComentario" th:field="*{contenido}" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Publicar Comentario</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Optional Bootstrap JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

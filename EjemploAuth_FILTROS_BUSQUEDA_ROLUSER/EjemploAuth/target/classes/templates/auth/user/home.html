@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Página de usuario</title>
+	<!-- Agregar enlaces a las hojas de estilo de Bootstrap -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Bienvenido, <span th:text="${username}">Nombre de Usuario</span>!</h1>
+		<p>Esta página es solo para Usuario.</p>
+		<div th:replace="~{fragments/logout-fragment :: logout-link}"></div>
+
+		<!-- Utilizar el sistema de grillas de Bootstrap -->
+		<div class="row">
+			<div class="col-md-8">
+				<!-- Listado de comentarios -->
+				<h2>Listado de Comentarios</h2>
+				<div th:replace="~{fragments/comentarios :: comentarioFragment}"></div>
+
+				<!-- Aquí puedes insertar el código para mostrar los comentarios -->
+			</div>
+			<div class="col-md-4">
+				<!-- Formulario para agregar comentarios -->
+				<h2>Agregar Comentario</h2>
+				<div th:replace="~{fragments/comentarios :: enlaceformularioComentarioFragment}"></div>
+				<!-- @TODO -->
+                <div th:replace="~{fragments/filtrocomentarios :: filtrousuario}"></div>
+
+				<!-- @TODO -->
+				<form action="/user/home" method="get">
+						<h2>Buscar por palabras</h2>
+						<input id="contenido" name="contenido" th:value="${contenido}"></input>
+						<button type="submit">Buscar</button>
+				</form>
+
+			</div>
+		</div>
+		<div th:replace="~{fragments/footer :: footerFragment}"></div>
+
+	</div>
+
+	<!-- Agregar scripts de Bootstrap (jQuery y Popper.js son necesarios) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

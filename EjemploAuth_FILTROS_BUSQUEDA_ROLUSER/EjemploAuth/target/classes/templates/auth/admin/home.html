@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Página de Administrador</title>
+	<!-- Incluir Bootstrap CSS desde CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container mt-4">
+		<h1>Bienvenido, <span th:text="${username}">Nombre de Usuario</span>!</h1>
+		<p>Esta página es solo para administradores.</p>
+		<!-- Fragmento de cierre de sesión -->
+		<div th:replace="~{fragments/logout-fragment :: logout-link}"></div>
+	</div>
+	<div class="container mt-5">
+		<h2>Tabla de Usuarios</h2>
+		<table  class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>ROLES</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterar sobre la lista de usuarios (puedes proporcionarla desde el controlador) -->
+				<tr th:each="usuario : ${usuarios}">
+					<td th:text="${usuario.id}"></td>
+					<td th:text="${usuario.username}"></td>
+					<td th:text="${usuario.password}"></td>
+					<td th:each="rol : ${usuario.roles}" th:text="${rol}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2>Tabla de Comentarios</h2>
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Contenido</th>
+					<th>Fecha de Creación</th>
+					<th>Nombre de Usuario</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterar sobre la lista de comentarios (puedes proporcionarla desde el controlador) -->
+				<tr th:each="comentario : ${comentarios}">
+					<td th:text="${comentario.id}"></td>
+					<td th:text="${comentario.contenido}"></td>
+					<td th:text="${comentario.fechaCreacion}"></td>
+					<td th:text="${comentario.usuario.username}"></td>
+					<td><a th:href="@{/admin/borrarComentario(id=${comentario.id})}">Borrar Comentario</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- Opcional: Incluir JavaScript de Bootstrap y sus dependencias -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<div th:replace="~{fragments/footer :: footerFragment}"></div>
+</body>
+
+</html>

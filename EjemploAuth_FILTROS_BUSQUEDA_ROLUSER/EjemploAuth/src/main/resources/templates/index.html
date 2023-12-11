@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <!-- Considera añadir enlaces a hojas de estilo CSS aquí -->
+    	<!-- Incluir Bootstrap CSS desde CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+	    <div class="container mt-4">
+    <!-- Encabezado de la página -->
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+    <main role="main">
+        <!-- Contenido principal -->
+        <h2>Bienvenido a Nuestro Sitio Web</h2>
+        <p>Explora, interactúa y participa en nuestra comunidad.</p>
+        <!-- Otros elementos del contenido principal aquí... -->
+        <a class="navbar-brand" th:href="@{/}" th:text="${T(com.github.javafaker.Faker).instance().chuckNorris().fact()}"></a>
+    </main>
+
+    <!-- Pie de página -->
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</div>
+    <!-- Considera añadir scripts JavaScript aquí si es necesario -->
+</body>
+</html>
